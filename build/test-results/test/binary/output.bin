@@ -1,3 +1,6 @@
+NPerson{id=50, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
 Records affected: 1
+RPerson{id=51, firstName='Bobby', lastName='Smith', dob=1982-09-13T01:51:54+01:00}
 Records affected: 1
+NPerson{id=52, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
 Records affected: 1

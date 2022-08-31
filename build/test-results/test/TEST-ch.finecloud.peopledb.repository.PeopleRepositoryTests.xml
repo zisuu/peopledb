@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-08-31T15:04:04" hostname="ChuckNorris.local" time="0.303">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-09-01T04:05:00" hostname="ChuckNorris.local" time="0.469">
   <properties/>
-  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.297"/>
-  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.005"/>
-  <system-out><![CDATA[Records affected: 1
+  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.258"/>
+  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.21"/>
+  <system-out><![CDATA[Person{id=50, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
 Records affected: 1
+Person{id=51, firstName='Bobby', lastName='Smith', dob=1982-09-13T01:51:54+01:00}
+Records affected: 1
+Person{id=52, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
 Records affected: 1
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -45,4 +45,14 @@ public class Person {
     public void setDob(ZonedDateTime dob) {
         this.dob = dob;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dob=" + dob +
+                '}';
+    }
 }
