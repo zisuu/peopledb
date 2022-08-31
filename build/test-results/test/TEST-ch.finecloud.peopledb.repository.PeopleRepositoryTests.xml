@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-08-31T12:08:30" hostname="ChuckNorris.local" time="0.06">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-08-31T15:04:04" hostname="ChuckNorris.local" time="0.303">
   <properties/>
-  <testcase name="canSave()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.06"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.297"/>
+  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.005"/>
+  <system-out><![CDATA[Records affected: 1
+Records affected: 1
+Records affected: 1
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
