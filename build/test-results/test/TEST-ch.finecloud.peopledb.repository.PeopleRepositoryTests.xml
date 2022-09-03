@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-09-01T04:05:00" hostname="ChuckNorris.local" time="0.469">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-03T04:27:19" hostname="ChuckNorris.local" time="0.477">
   <properties/>
-  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.258"/>
-  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.21"/>
-  <system-out><![CDATA[Person{id=50, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
+  <testcase name="canDeleteMultiplePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.477"/>
+  <system-out><![CDATA[Person{id=82, firstName='Test1', lastName='Jackson', dob=2022-09-03T06:27:19.535614+02:00[Europe/Zurich]}
 Records affected: 1
-Person{id=51, firstName='Bobby', lastName='Smith', dob=1982-09-13T01:51:54+01:00}
+Person{id=83, firstName='Test2', lastName='Jackson', dob=2022-09-03T06:27:19.553023+02:00[Europe/Zurich]}
 Records affected: 1
-Person{id=52, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
-Records affected: 1
+2
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
