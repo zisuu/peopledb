@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-03T04:27:19" hostname="ChuckNorris.local" time="0.477">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-05T04:53:24" hostname="ChuckNorris.local" time="0.424">
   <properties/>
-  <testcase name="canDeleteMultiplePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.477"/>
-  <system-out><![CDATA[Person{id=82, firstName='Test1', lastName='Jackson', dob=2022-09-03T06:27:19.535614+02:00[Europe/Zurich]}
+  <testcase name="canUpdate()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTests" time="0.424"/>
+  <system-out><![CDATA[Person{id=91, firstName='Test2', lastName='Jackson', dob=2022-09-05T06:53:24.374954+02:00[Europe/Zurich]}
 Records affected: 1
-Person{id=83, firstName='Test2', lastName='Jackson', dob=2022-09-03T06:27:19.553023+02:00[Europe/Zurich]}
-Records affected: 1
-2
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
