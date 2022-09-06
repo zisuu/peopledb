@@ -6,55 +6,34 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class PeopleRepository {
+public class PeopleRepository extends CRUDRepository<Person> {
     public static final String SAVE_PERSON_SQL = String.format("INSERT INTO PEOPLE (FIRST_NAME, LAST_NAME, DOB) VALUES(?,?,?)");
-    public static final String GET_PERSON_BY_ID = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE WHERE ID=?");
-    private Connection connection;
+    public static final String FIND_BY_ID_SQL = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE WHERE ID=?");
+    public static final String FIND_ALL_SQL = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE");
+    public static final String SELECT_COUNT_SQL = "SELECT COUNT(*) FROM PEOPLE";
+    public static final String DELETE_SQL = "DELETE FROM PEOPLE WHERE ID=?";
+    public static final String DELETE_IN_SQL = "DELETE FROM PEOPLE WHERE ID IN (:ids)";
+    public static final String UPDATE_SQL = "UPDATE PEOPLE SET FIRST_NAME=?, LAST_NAME=?, DOB=?, SALARY=? WHERE ID=?";
+
     public PeopleRepository(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
 
-    public Person save(Person person) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(SAVE_PERSON_SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, person.getFirstName());
-            ps.setString(2, person.getLastName());
-            ps.setTimestamp(3, convertODBtoTimeStamp(person.getDob()));
-            int recordsAffected = ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            while (rs.next()) {
-                long id = rs.getLong(1);
-                person.setId(id);
-                System.out.println(person);
-            }
-            System.out.printf("Records affected: %d%n", recordsAffected);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return person;
+    @Override
+    String getSaveSql() {
+        return SAVE_PERSON_SQL;
     }
 
-    public Optional<Person> findById(Long id) {
-        Person person = null;
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(GET_PERSON_BY_ID);
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                person = extractPersonFromResultSet(rs);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return Optional.ofNullable(person);
+    @Override
+    void mapForSave(Person entity, PreparedStatement ps) throws SQLException {
+        ps.setString(1, entity.getFirstName());
+        ps.setString(2, entity.getLastName());
+        ps.setTimestamp(3, convertODBtoTimeStamp(entity.getDob()));
     }
 
-    private Person extractPersonFromResultSet(ResultSet rs) throws SQLException {
+    @Override
+    Person extractEntityFromResultSet(ResultSet rs) throws SQLException {
         long personID = rs.getLong("ID");
         String firstName = rs.getString("FIRST_NAME");
         String lastName = rs.getString("LAST_NAME");
@@ -63,63 +42,42 @@ public class PeopleRepository {
         return new Person(personID, firstName, lastName, dob, salary);
     }
 
-    public long count() {
-        long count = 0;
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM PEOPLE");
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                count = rs.getLong(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
-    public void delete(Person person) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM PEOPLE WHERE ID=?");
-            ps.setLong(1, person.getId());
-            int recordsAffected = ps.executeUpdate();
-            System.out.println(recordsAffected);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    void mapForUpdate(Person entity, PreparedStatement ps) throws SQLException {
+        ps.setString(1, entity.getFirstName());
+        ps.setString(2, entity.getLastName());
+        ps.setTimestamp(3, convertODBtoTimeStamp(entity.getDob()));
+        ps.setBigDecimal(4, entity.getSalary());
     }
 
-    public void delete(Person...people) {
-//        This would be the easiest Option to delete people,
-//        however from a DB view it's not the most efficient:
-//        for (Person person : people) {
-//            delete(person);
-//        }
-        try {
-//            - Unfortunately the current version of H2 DB does not support a prepared SQL statement for this.
-//            - This will make us vulnerable to SQL injection, but for demo purposes we do it anyway
-//            - This should never be used in production
-            Statement stmt = connection.createStatement();
-            String ids = Arrays.stream(people).toList().stream()
-                    .map(person -> person.getId().toString())
-                    .collect(Collectors.joining(","));
-            int affectedRecordCount = stmt.executeUpdate("DELETE FROM PEOPLE WHERE ID IN (:ids)".replace(":ids", ids));
-            System.out.println(affectedRecordCount);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    protected String getFindByIdSql() {
+        return FIND_BY_ID_SQL;
     }
 
-    public void update(Person person) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE PEOPLE SET FIRST_NAME=?, LAST_NAME=?, DOB=?, SALARY=? WHERE ID=?");
-            ps.setString(1, person.getFirstName());
-            ps.setString(2, person.getLastName());
-            ps.setTimestamp(3, convertODBtoTimeStamp(person.getDob()));
-            ps.setBigDecimal(4, person.getSalary());
-            ps.setLong(5, person.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    protected String getFindAllSql() {
+        return FIND_ALL_SQL;
+    }
+
+    @Override
+    protected String getCountSql() {
+        return SELECT_COUNT_SQL;
+    }
+
+    @Override
+    protected String getDeleteSql() {
+        return DELETE_SQL;
+    }
+
+    @Override
+    protected String getDeleteInSql() {
+        return DELETE_IN_SQL;
+    }
+
+    @Override
+    protected String getUpdateSql() {
+        return UPDATE_SQL;
     }
 
     private Timestamp convertODBtoTimeStamp(ZonedDateTime dob) {

@@ -11,12 +11,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.LONG;
 
 public class PeopleRepositoryTests {
 
@@ -95,5 +93,22 @@ public class PeopleRepositoryTests {
 
         Person P2 = repo.findById(savedPerson.getId()).get();
         assertThat(P2.getSalary()).isNotEqualTo(p1.getSalary());
+    }
+
+    @Test
+    public void canFindAll() {
+        repo.save(new Person("John", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John1", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John2", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John3", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John4", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John5", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John6", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John7", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John8", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+        repo.save(new Person("John9", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
+
+        List<Person> people = repo.findAll();
+        assertThat(people.size()).isGreaterThanOrEqualTo(10);
     }
 }
