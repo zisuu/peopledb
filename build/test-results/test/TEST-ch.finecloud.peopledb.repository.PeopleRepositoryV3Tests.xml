@@ -1,57 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-09-06T12:09:00" hostname="ChuckNorris.local" time="1.029">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-06T13:29:58" hostname="ChuckNorris.local" time="85.067">
   <properties/>
-  <testcase name="canDeleteOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.441"/>
-  <testcase name="testPersonIdNotFound()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.188"/>
-  <testcase name="canFindPersonById()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.055"/>
-  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.057"/>
-  <testcase name="canUpdate()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.058"/>
-  <testcase name="canDeleteMultiplePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.055"/>
-  <testcase name="canGetCount()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.053"/>
-  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.054"/>
-  <testcase name="canFindAll()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="0.062"/>
-  <system-out><![CDATA[Person{id=732, firstName='Test', lastName='Jackson', dob=2022-09-06T14:09:00.355134+02:00[Europe/Zurich]}
-Records affected: 1
-1
-Person{id=733, firstName='Test', lastName='Jackson', dob=2022-09-06T14:09:00.819181+02:00[Europe/Zurich]}
-Records affected: 1
-Person{id=734, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
-Records affected: 1
-Person{id=735, firstName='Bobby', lastName='Smith', dob=1982-09-13T01:51:54+01:00}
-Records affected: 1
-Person{id=736, firstName='Test2', lastName='Jackson', dob=2022-09-06T14:09:00.931872+02:00[Europe/Zurich]}
-Records affected: 1
-Person{id=737, firstName='Test1', lastName='Jackson', dob=2022-09-06T14:09:00.992907+02:00[Europe/Zurich]}
-Records affected: 1
-Person{id=738, firstName='Test2', lastName='Jackson', dob=2022-09-06T14:09:00.993840+02:00[Europe/Zurich]}
-Records affected: 1
-2
-Person{id=739, firstName='John1', lastName='Smoth', dob=1880-11-15T04:44+06:00}
-Records affected: 1
-Person{id=740, firstName='John2', lastName='Smoth', dob=1880-11-15T04:44+06:00}
-Records affected: 1
-Person{id=741, firstName='John', lastName='Smith', dob=1980-11-15T15:15-06:00}
-Records affected: 1
-Person{id=742, firstName='John', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=743, firstName='John1', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=744, firstName='John2', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=745, firstName='John3', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=746, firstName='John4', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=747, firstName='John5', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=748, firstName='John6', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=749, firstName='John7', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=750, firstName='John8', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-Person{id=751, firstName='John9', lastName='Smith', dob=1980-11-14T16:22:11+01:00}
-Records affected: 1
-]]></system-out>
+  <testcase name="loadData()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="85.067"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
