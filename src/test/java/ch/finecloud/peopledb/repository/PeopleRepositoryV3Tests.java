@@ -16,16 +16,16 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PeopleRepositoryTests {
+public class PeopleRepositoryV3Tests {
 
     private Connection connection;
-    private PeopleRepository repo;
+    private PeopleRepositoryV3 repo;
 
     @BeforeEach
     void setUp() throws SQLException {
         connection = DriverManager.getConnection("jdbc:h2:~/peopletest".replace("~", System.getProperty("user.home")));
         connection.setAutoCommit(false);
-        repo = new PeopleRepository(connection);
+        repo = new PeopleRepositoryV3(connection);
     }
 
     @AfterEach
@@ -81,6 +81,15 @@ public class PeopleRepositoryTests {
         repo.delete(p1, p2);
         long endCount = repo.count();
         assertThat(endCount).isEqualTo(startCount -2);
+    }
+
+    @Test
+    public void canGetCount() {
+        long startCount = repo.count();
+        repo.save(new Person("John1", "Smoth", ZonedDateTime.of(1880,11,15,4,44,0,0,ZoneId.of("+6"))));
+        repo.save(new Person("John2", "Smoth", ZonedDateTime.of(1880,11,15,4,44,0,0,ZoneId.of("+6"))));
+        long endCount = repo.count();
+        assertThat(endCount).isEqualTo(startCount +2);
     }
 
     @Test

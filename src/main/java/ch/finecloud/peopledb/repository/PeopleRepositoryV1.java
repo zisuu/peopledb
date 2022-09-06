@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class PeopleRepositoryOriginal {
+public class PeopleRepositoryV1 {
     public static final String SAVE_PERSON_SQL = String.format("INSERT INTO PEOPLE (FIRST_NAME, LAST_NAME, DOB) VALUES(?,?,?)");
     public static final String GET_PERSON_BY_ID = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE WHERE ID=?");
     private Connection connection;
-    public PeopleRepositoryOriginal(Connection connection) {
+    public PeopleRepositoryV1(Connection connection) {
         this.connection = connection;
     }
 

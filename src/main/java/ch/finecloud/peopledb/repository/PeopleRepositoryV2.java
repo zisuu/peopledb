@@ -7,7 +7,7 @@ import java.sql.*;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class PeopleRepository extends CRUDRepository<Person> {
+public class PeopleRepositoryV2 extends CRUDRepository<Person> {
     public static final String SAVE_PERSON_SQL = String.format("INSERT INTO PEOPLE (FIRST_NAME, LAST_NAME, DOB) VALUES(?,?,?)");
     public static final String FIND_BY_ID_SQL = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE WHERE ID=?");
     public static final String FIND_ALL_SQL = String.format("SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE");
@@ -16,7 +16,7 @@ public class PeopleRepository extends CRUDRepository<Person> {
     public static final String DELETE_IN_SQL = "DELETE FROM PEOPLE WHERE ID IN (:ids)";
     public static final String UPDATE_SQL = "UPDATE PEOPLE SET FIRST_NAME=?, LAST_NAME=?, DOB=?, SALARY=? WHERE ID=?";
 
-    public PeopleRepository(Connection connection) {
+    public PeopleRepositoryV2(Connection connection) {
         super(connection);
     }
 
