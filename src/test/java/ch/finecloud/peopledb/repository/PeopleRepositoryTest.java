@@ -1,8 +1,11 @@
 package ch.finecloud.peopledb.repository;
 
+import ch.finecloud.peopledb.model.Address;
 import ch.finecloud.peopledb.model.Person;
+import ch.finecloud.peopledb.model.Region;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -20,16 +23,16 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PeopleRepositoryV3Tests {
+public class PeopleRepositoryTest {
 
     private Connection connection;
-    private PeopleRepositoryV3 repo;
+    private PeopleRepository repo;
 
     @BeforeEach
     void setUp() throws SQLException {
         connection = DriverManager.getConnection("jdbc:h2:~/peopletest".replace("~", System.getProperty("user.home")));
         connection.setAutoCommit(false);
-        repo = new PeopleRepositoryV3(connection);
+        repo = new PeopleRepository(connection);
     }
 
     @AfterEach
@@ -53,6 +56,16 @@ public class PeopleRepositoryV3Tests {
         Person savedPerson1 = repo.save(john);
         Person savedPerson2 = repo.save(bobby);
         assertThat(savedPerson1.getId()).isNotEqualTo(savedPerson2.getId());
+    }
+
+    @Test
+    public void canSavePersonWithAddress() throws SQLException {
+        Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
+        Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
+        jooonyy.setHomeAddress(address);
+
+        Person savedPerson = repo.save(jooonyy);
+        assertThat(savedPerson.getHomeAddress().id()).isGreaterThan(0);
     }
 
     @Test
@@ -109,6 +122,7 @@ public class PeopleRepositoryV3Tests {
     }
 
     @Test
+    @Disabled
     public void canFindAll() {
         repo.save(new Person("John", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
         repo.save(new Person("John1", "Smith", ZonedDateTime.of(1980,11,14,16,22,11,0,ZoneId.of("+1"))));
@@ -126,6 +140,7 @@ public class PeopleRepositoryV3Tests {
     }
 
     @Test
+    @Disabled
     public void loadData() throws IOException, SQLException {
             Files.lines(Path.of("/Users/Dave/Downloads/Hr5m.csv"))
                     .skip(1)
@@ -144,4 +159,6 @@ public class PeopleRepositoryV3Tests {
                     .forEach(repo::save);
             connection.commit();
     }
+
+
 }

@@ -14,11 +14,11 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-abstract class CRUDRepository<T> {
+abstract class CrudRepository<T> {
 
     protected Connection connection;
 
-    public CRUDRepository(Connection connection) {
+    public CrudRepository(Connection connection) {
         this.connection = connection;
     }
 

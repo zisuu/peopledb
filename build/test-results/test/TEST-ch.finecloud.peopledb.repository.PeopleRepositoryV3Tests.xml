@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-09-06T13:29:58" hostname="ChuckNorris.local" time="85.067">
-  <properties/>
-  <testcase name="loadData()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryV3Tests" time="85.067"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
