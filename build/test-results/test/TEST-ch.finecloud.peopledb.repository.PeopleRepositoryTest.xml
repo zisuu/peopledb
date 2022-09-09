@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTest" tests="11" skipped="2" failures="0" errors="0" timestamp="2022-09-08T04:40:35" hostname="ChuckNorris.local" time="25.744">
+<testsuite name="ch.finecloud.peopledb.repository.PeopleRepositoryTest" tests="12" skipped="2" failures="0" errors="0" timestamp="2022-09-09T04:47:08" hostname="ChuckNorris.local" time="20.54">
   <properties/>
-  <testcase name="canDeleteOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="10.173"/>
-  <testcase name="testPersonIdNotFound()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.053"/>
-  <testcase name="canFindPersonById()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.05"/>
-  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.063"/>
-  <testcase name="canUpdate()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.089"/>
-  <testcase name="canDeleteMultiplePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="10.067"/>
-  <testcase name="canSavePersonWithAddress()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.04"/>
-  <testcase name="canGetCount()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="5.163"/>
-  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.036"/>
-  <testcase name="loadData()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.0">
+  <testcase name="canDeleteOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="8.734"/>
+  <testcase name="testPersonIdNotFound()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.044"/>
+  <testcase name="canFindPersonByIdWithAddress()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.052"/>
+  <testcase name="canFindPersonById()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.043"/>
+  <testcase name="canSaveTwoPeople()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.044"/>
+  <testcase name="canUpdate()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.045"/>
+  <testcase name="canDeleteMultiplePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="7.416"/>
+  <testcase name="canSavePersonWithAddress()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.038"/>
+  <testcase name="canGetCount()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="4.08"/>
+  <testcase name="canSaveOnePerson()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.037"/>
+  <testcase name="loadData()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.001">
     <skipped/>
   </testcase>
   <testcase name="canFindAll()" classname="ch.finecloud.peopledb.repository.PeopleRepositoryTest" time="0.0">
