@@ -16,12 +16,12 @@ public class PeopleRepository extends CrudRepository<Person> {
     private AddressRepository addressRepository = null;
     public static final String SAVE_PERSON_SQL = """
         INSERT INTO PEOPLE
-        (FIRST_NAME, LAST_NAME, DOB, SALARY, EMAIL, HOME_ADDRESS)
-        VALUES(?,?,?,?,?,?)""";
+        (FIRST_NAME, LAST_NAME, DOB, SALARY, EMAIL, HOME_ADDRESS, BUSINESS_ADDRESS)
+        VALUES(?,?,?,?,?,?,?)""";
     public static final String FIND_BY_ID_SQL = """
         SELECT 
-        P.ID, P.FIRST_NAME, P.LAST_NAME, P.DOB, P.SALARY, P.HOME_ADDRESS,
-        A.ID, A.STREET_ADDRESS, A.ADDRESS2, A.CITY, A.STATE, A.POSTCODE, A.COUNTY, A.REGION, A.COUNTRY
+        P.ID, P.FIRST_NAME, P.LAST_NAME, P.DOB, P.SALARY, P.HOME_ADDRESS, P.BUSINESS_ADDRESS,
+        A.ID as A_ID, A.STREET_ADDRESS, A.ADDRESS2, A.CITY, A.STATE, A.POSTCODE, A.COUNTY, A.REGION, A.COUNTRY
         FROM PEOPLE AS P
         LEFT OUTER JOIN ADDRESSES AS A ON P.HOME_ADDRESS = A.ID
         WHERE P.ID=?
@@ -46,12 +46,17 @@ public class PeopleRepository extends CrudRepository<Person> {
         ps.setTimestamp(3, convertODBtoTimeStamp(entity.getDob()));
         ps.setBigDecimal(4, entity.getSalary());
         ps.setString(5, entity.getEmail());
+        associateAddressWithPerson(entity, ps, entity.getHomeAddress(), 6);
+        associateAddressWithPerson(entity, ps, entity.getBusinessAddress(), 7);
+    }
 
-        if (entity.getHomeAddress().isPresent()) {
-            savedAddress = addressRepository.save(entity.getHomeAddress().get());
-            ps.setLong(6, savedAddress.id());
+    private void associateAddressWithPerson(Person entity, PreparedStatement ps, Optional<Address> address, int parameterIndex) throws SQLException {
+        Address savedAddress;
+        if (address.isPresent()) {
+            savedAddress = addressRepository.save(address.get());
+            ps.setLong(parameterIndex, savedAddress.id());
         } else {
-            ps.setObject(6, null);
+            ps.setObject(parameterIndex, null);
         }
     }
 
@@ -86,7 +91,9 @@ public class PeopleRepository extends CrudRepository<Person> {
     }
 
     private Address extractAddress(ResultSet rs) throws SQLException {
-        long addrId = rs.getLong("ID");
+        Long addrId = getValueByAlias("A_ID", rs, Long.class);
+        if (addrId == null) return null;
+//        long addrId = rs.getLong("A_ID");
         String streetAddress = rs.getString("STREET_ADDRESS");
         String address2 = rs.getString("ADDRESS2");
         String city = rs.getString("CITY");
@@ -97,6 +104,16 @@ public class PeopleRepository extends CrudRepository<Person> {
         String country = rs.getString("COUNTRY");
         Address address = new Address(addrId, streetAddress, address2, city, state, postcode, county, country, region);
         return address;
+    }
+
+    private <T> T getValueByAlias(String alias, ResultSet rs, Class<T> clazz) throws SQLException {
+        int columnCount = rs.getMetaData().getColumnCount();
+        for (int colIdX = 1; colIdX < columnCount; colIdX++) {
+            if (alias.equals(rs.getMetaData().getColumnLabel(colIdX))) {
+                return (T) rs.getObject(colIdX);
+            }
+        }
+        throw new SQLException(String.format("Column not found for alias: '%s'", alias));
     }
 
     private Timestamp convertODBtoTimeStamp(ZonedDateTime dob) {

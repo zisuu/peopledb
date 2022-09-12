@@ -30,7 +30,7 @@ public class PeopleRepositoryTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:h2:~/peopletest".replace("~", System.getProperty("user.home")));
+        connection = DriverManager.getConnection("jdbc:h2:~/peopletest;TRACE_LEVEL_SYSTEM_OUT=0".replace("~", System.getProperty("user.home")));
         connection.setAutoCommit(false);
         repo = new PeopleRepository(connection);
     }
@@ -59,7 +59,7 @@ public class PeopleRepositoryTest {
     }
 
     @Test
-    public void canSavePersonWithAddress() throws SQLException {
+    public void canSavePersonWithHomeAddress() throws SQLException {
         Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
         Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
         jooonyy.setHomeAddress(address);
@@ -68,6 +68,15 @@ public class PeopleRepositoryTest {
         assertThat(savedPerson.getHomeAddress().get().id()).isGreaterThan(0);
     }
 
+    @Test
+    public void canSavePersonWithBizAddress() throws SQLException {
+        Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
+        Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
+        jooonyy.setBusinessAddress(address);
+
+        Person savedPerson = repo.save(jooonyy);
+        assertThat(savedPerson.getBusinessAddress().get().id()).isGreaterThan(0);
+    }
     @Test
     public void canFindPersonById() {
         Person savedPerson = repo.save(new Person("Test", "Jackson", ZonedDateTime.now()));
