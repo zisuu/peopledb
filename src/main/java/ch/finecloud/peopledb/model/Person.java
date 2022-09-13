@@ -120,7 +120,7 @@ public class Person {
         this.businessAddress = Optional.ofNullable(businessAddress);
     }
 
-    public Optional<Address>  getBusinessAddress() {
+    public Optional<Address> getBusinessAddress() {
         return businessAddress;
     }
 }

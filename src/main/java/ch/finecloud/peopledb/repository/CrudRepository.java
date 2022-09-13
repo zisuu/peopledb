@@ -26,7 +26,8 @@ abstract class CrudRepository<T> {
         try {
             PreparedStatement ps = connection.prepareStatement(getSqlByAnnotation(CrudOperation.SAVE, this::getSaveSql), Statement.RETURN_GENERATED_KEYS);
             mapForSave(entity, ps);
-            int recordsAffected = ps.executeUpdate();
+            //int recordsAffected = ps.executeUpdate();
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             while (rs.next()) {
                 long id = rs.getLong(1);

@@ -70,8 +70,8 @@ public class PeopleRepositoryTest {
 
     @Test
     public void canSavePersonWithBizAddress() throws SQLException {
-        Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
-        Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
+        Person jooonyy = new Person("jooonyyx", "Smithx", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
+        Address address = new Address(null, "1 Langestrasse", "21G", "Blabla", "Bern", "3000", "Switzerland", "Bern", Region.WEST);
         jooonyy.setBusinessAddress(address);
 
         Person savedPerson = repo.save(jooonyy);
@@ -85,7 +85,7 @@ public class PeopleRepositoryTest {
     }
 
     @Test
-    public void canFindPersonByIdWithAddress() throws SQLException {
+    public void canFindPersonByIdWithHomeAddress() throws SQLException {
         Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
         Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
         jooonyy.setHomeAddress(address);
@@ -95,6 +95,16 @@ public class PeopleRepositoryTest {
         assertThat(foundPerson.getHomeAddress().get().state()).isEqualTo("WA");
     }
 
+    @Test
+    public void canFindPersonByIdWithBizAddress() throws SQLException {
+        Person jooonyy = new Person("jooonyy", "Smith", ZonedDateTime.of(1982,9,13,1,51,54,0, ZoneId.of("+1")));
+        Address address = new Address(null, "123 Bale St.", "Apt. 1A", "Wala Wala", "WA", "90210", "United States", "Fulton County", Region.WEST);
+        jooonyy.setBusinessAddress(address);
+
+        Person savedPerson = repo.save(jooonyy);
+        Person foundPerson = repo.findById(savedPerson.getId()).get();
+        assertThat(foundPerson.getBusinessAddress().get().state()).isEqualTo("WA");
+    }
     @Test
     public void testPersonIdNotFound() {
         Optional<Person> foundPerson = repo.findById(-1L);
