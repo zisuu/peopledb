@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PeopleRepository extends CrudRepository<Person> {
     private AddressRepository addressRepository = null;
     public static final String SAVE_PERSON_SQL = """
-        INSERT INTO PEOPLE
+        INSERT INTO PEOPLE2
         (FIRST_NAME, LAST_NAME, DOB, SALARY, EMAIL, HOME_ADDRESS, BIZ_ADDRESS)
         VALUES(?, ?, ?, ?, ?, ?, ?)""";
     public static final String FIND_BY_ID_SQL = """
@@ -23,15 +23,15 @@ public class PeopleRepository extends CrudRepository<Person> {
         P.ID, P.FIRST_NAME, P.LAST_NAME, P.DOB, P.SALARY, P.HOME_ADDRESS,
         HOME.ID as HOME_ID, HOME.STREET_ADDRESS as HOME_STREET_ADDRESS, HOME.ADDRESS2 as HOME_ADDRESS2, HOME.CITY as HOME_CITY, HOME.STATE as HOME_STATE, HOME.POSTCODE as HOME_POSTCODE, HOME.COUNTY as HOME_COUNTY, HOME.REGION as HOME_REGION, HOME.COUNTRY as HOME_COUNTRY,
         BIZ.ID as BIZ_ID, BIZ.STREET_ADDRESS as BIZ_STREET_ADDRESS, BIZ.ADDRESS2 as BIZ_ADDRESS2, BIZ.CITY as BIZ_CITY, BIZ.STATE as BIZ_STATE, BIZ.POSTCODE as BIZ_POSTCODE, BIZ.COUNTY as BIZ_COUNTY, BIZ.REGION as BIZ_REGION, BIZ.COUNTRY as BIZ_COUNTRY,
-        FROM PEOPLE AS P
-        LEFT OUTER JOIN ADDRESSES AS HOME ON P.HOME_ADDRESS = HOME.ID
-        LEFT OUTER JOIN ADDRESSES AS BIZ ON P.BIZ_ADDRESS = BIZ.ID
+        FROM PEOPLE2 AS P
+        LEFT OUTER JOIN ADDRESSES2 AS HOME ON P.HOME_ADDRESS = HOME.ID
+        LEFT OUTER JOIN ADDRESSES2 AS BIZ ON P.BIZ_ADDRESS = BIZ.ID
         WHERE P.ID=?""";
-    public static final String FIND_ALL_SQL = "SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE";
-    public static final String SELECT_COUNT_SQL = "SELECT COUNT(*) FROM PEOPLE";
-    public static final String DELETE_SQL = "DELETE FROM PEOPLE WHERE ID=?";
-    public static final String DELETE_IN_SQL = "DELETE FROM PEOPLE WHERE ID IN (:ids)";
-    public static final String UPDATE_SQL = "UPDATE PEOPLE SET FIRST_NAME=?, LAST_NAME=?, DOB=?, SALARY=? WHERE ID=?";
+    public static final String FIND_ALL_SQL = "SELECT ID, FIRST_NAME, LAST_NAME, DOB, SALARY FROM PEOPLE2";
+    public static final String SELECT_COUNT_SQL = "SELECT COUNT(*) FROM PEOPLE2";
+    public static final String DELETE_SQL = "DELETE FROM PEOPLE2 WHERE ID=?";
+    public static final String DELETE_IN_SQL = "DELETE FROM PEOPLE2 WHERE ID IN (:ids)";
+    public static final String UPDATE_SQL = "UPDATE PEOPLE2 SET FIRST_NAME=?, LAST_NAME=?, DOB=?, SALARY=? WHERE ID=?";
 
     public PeopleRepository(Connection connection) {
         super(connection);

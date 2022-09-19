@@ -169,7 +169,7 @@ abstract class CrudRepository<T> {
     /**
      *
      * @return should return a SQL string like:
-     * "DELETE FROM PEOPLE WHERE ID IN (:ids)"
+     * "DELETE FROM PEOPLE2 WHERE ID IN (:ids)"
      * Be sure to include the '(:ids)' named parameter & call it 'ids'
      */
     protected String getDeleteInSql() {throw new RuntimeException("SQL not defined.");}

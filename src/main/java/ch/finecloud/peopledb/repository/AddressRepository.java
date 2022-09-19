@@ -38,7 +38,7 @@ public class AddressRepository extends CrudRepository<Address> {
 
     @Override
     @SQL(operationType = CrudOperation.SAVE, value= """
-            INSERT INTO ADDRESSES (STREET_ADDRESS, ADDRESS2, CITY, STATE, POSTCODE, COUNTY, REGION, COUNTRY)
+            INSERT INTO ADDRESSES2 (STREET_ADDRESS, ADDRESS2, CITY, STATE, POSTCODE, COUNTY, REGION, COUNTRY)
             VALUES(?,?,?,?,?,?,?,?)
             """)
     void mapForSave(Address entity, PreparedStatement ps) throws SQLException {
